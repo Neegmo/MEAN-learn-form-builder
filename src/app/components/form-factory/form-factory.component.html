@@ -1,0 +1,72 @@
+<div style="width: 300px; padding: 10px">
+  <h3 style="margin-bottom: 20px">Contact form</h3>
+  <form action="" style="display: flex; flex-direction: column">
+    @for (formField of formFields; track $index) {
+
+    <label [for]="formField.label">{{ formField.label }} </label>
+    @switch (formField.type) { @case ('text') {
+    <input
+      [id]="formField.label"
+      [type]="formField.type"
+      [placeholder]="formField.placeholder"
+      style="
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+      "
+      [formControl]="formGroup.get(formField.formControlName)"
+    />
+    } @case ('textArea') {
+    <textarea
+      [id]="formField.label"
+      [placeholder]="formField.placeholder"
+      style="
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+      "
+      [formControl]="formGroup.get(formField.formControlName)"
+    ></textarea>
+    } @case ("dropdown") {
+    <select
+      [id]="formField.label"
+      style="
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+      "
+      [formControl]="formGroup.get(formField.formControlName)"
+    >
+      <option value="" disabled selected>Select an option</option>
+
+      @for (option of formField.options; track $index) {
+      <option [value]="option">{{ option }}</option>
+      }
+    </select>
+    } } }
+  </form>
+  <button
+    type="button"
+    (click)="printForm()"
+    style="
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: var(--color-primary);
+      color: white;
+    "
+  >
+    Update Name
+  </button>
+</div>
