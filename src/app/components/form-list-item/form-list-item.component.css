@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  width: 250px;
+  height: 300px;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+.description {
+  text-overflow: ellipsis;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  flex-shrink: 0;
+}
+button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}

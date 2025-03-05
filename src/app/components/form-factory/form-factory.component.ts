@@ -1,8 +1,15 @@
-import { Component, inject, Input, input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  input,
+  Output,
+  output,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormControl } from '@angular/forms';
-import { InputField } from '../../interfaces/input-field';
 import { FormService } from '../../services/form.service';
+import { FormDetails } from '../../interfaces/form-details';
 
 @Component({
   selector: 'app-form-factory',
@@ -11,15 +18,18 @@ import { FormService } from '../../services/form.service';
   styleUrl: './form-factory.component.css',
 })
 export class FormFactoryComponent {
-  @Input() formFields!: InputField[];
-  formService = inject(FormService);
   formGroup: any;
+  @Input() formDetails!: FormDetails;
+  @Output() onSubmitClicked = new EventEmitter<any>();
+  formFields = this.formDetails?.fields;
+  formService = inject(FormService);
   ngOnInit() {
-    this.formGroup = this.formService.generateFormGroup(this.formFields);
-    // console.log(this.formGroup.get('name'));
+    this.formGroup = this.formService.generateFormGroup(
+      this.formDetails?.fields
+    );
   }
 
   printForm() {
-    console.log(this.formGroup.value);
+    this.onSubmitClicked.emit(this.formGroup.value);
   }
 }

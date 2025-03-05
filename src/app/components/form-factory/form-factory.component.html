@@ -1,7 +1,7 @@
 <div style="width: 300px; padding: 10px">
-  <h3 style="margin-bottom: 20px">Contact form</h3>
+  <h3 style="margin-bottom: 20px">{{ formDetails.title }}</h3>
   <form action="" style="display: flex; flex-direction: column">
-    @for (formField of formFields; track $index) {
+    @for (formField of formDetails.fields; track $index) {
 
     <label [for]="formField.label">{{ formField.label }} </label>
     @switch (formField.type) { @case ('text') {
@@ -54,19 +54,10 @@
     </select>
     } } }
   </form>
-  <button
-    type="button"
-    (click)="printForm()"
-    style="
-      width: 100%;
-      padding: 15px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-      background-color: var(--color-primary);
-      color: white;
-    "
-  >
-    Update Name
+  @if(formDetails.button) {
+
+  <button type="button" (click)="printForm()">
+    {{ formDetails.button.title }}
   </button>
+  }
 </div>
