@@ -1,5 +1,5 @@
 <div class="card">
-  <form [formGroup]="surveyInfo">
+  <form [formGroup]="surveyInfo" (change)="onFormUpdatedLocal()">
     <input
       type="text"
       class="title"

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormListItemComponent } from '../../components/form-list-item/form-list-item.component';
 import { FormListItem } from '../../interfaces/form-list-item';
+import { SurveyService } from '../../services/survey.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,7 @@ import { FormListItem } from '../../interfaces/form-list-item';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   formList: FormListItem[] = [
     {
       title: 'Title 1',
@@ -39,4 +41,25 @@ ipsum dolor sit amet...'
       description: 'The short description for the third form',
     },
   ];
+  surveysService = inject(SurveyService);
+
+  subscription: Subscription[] = [];
+
+  ngOnInit() {
+    // console.log('SURVEYS: ', this.surveysService.getSurveys());
+    this.getSurveys();
+    console.log('Service', this.surveysService.surveys.value);
+  }
+
+  ngOnDestroy() {
+    this.subscription.forEach((sub) => sub.unsubscribe());
+  }
+
+  getSurveys() {
+    this.subscription.push(
+      this.surveysService.surveys.subscribe((value) => {
+        console.log('value: ', value);
+      })
+    );
+  }
 }

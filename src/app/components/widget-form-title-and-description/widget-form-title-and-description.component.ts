@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormListItem } from '../../interfaces/form-list-item';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class WidgetFormTitleAndDescriptionComponent {
   @Input() formItem!: FormListItem;
+  @Output() onFormUpdated = new EventEmitter();
   fb = inject(FormBuilder);
   surveyInfo = this.fb.group({
     title: '',
@@ -22,5 +23,10 @@ export class WidgetFormTitleAndDescriptionComponent {
       title: this.formItem.title,
       description: this.formItem.description,
     });
+  }
+
+  onFormUpdatedLocal() {
+    this.onFormUpdated.emit(this.surveyInfo.value);
+    console.log('UPDATED');
   }
 }

@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
 export class WidgetCreateFieldComponent {
   @Input() fieldData!: any;
   @Output() onDelete = new EventEmitter<number>();
+  @Output() onFormChange = new EventEmitter();
   formBuilder = inject(FormBuilder);
   field: WritableSignal<any> = signal({});
   readonly fieldTypesArray = FieldTypeArray;
@@ -41,6 +42,10 @@ export class WidgetCreateFieldComponent {
     return this.formGroup.get('options') as FormArray;
   }
 
+  onFormChangeLocal() {
+    this.onFormChange.emit(this.formGroup.value);
+  }
+
   ngOnInit() {
     this.field.set(this.fieldData);
     this.formGroup.patchValue({
@@ -48,21 +53,15 @@ export class WidgetCreateFieldComponent {
       description: this.fieldData.description,
       type: this.fieldData.type,
     });
-    console.log(this.formGroup.value);
   }
 
   onAddOption() {
     this.options.push(this.formBuilder.control(''));
   }
   onRemoveOption(index: number) {
-    console.log('index: ', index);
     this.options.removeAt(index);
   }
   onDeleteClicked() {
     this.onDelete.emit();
-  }
-
-  displayFormValues() {
-    console.log(this.formGroup.value);
   }
 }

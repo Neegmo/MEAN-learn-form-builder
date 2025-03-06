@@ -1,12 +1,11 @@
 <div class="card">
   <div style="flex: 1">
-    <form action="" [formGroup]="formGroup">
+    <form action="" [formGroup]="formGroup" (change)="onFormChangeLocal()">
       <input
         type="text"
         name="title"
         class="title"
         formControlName="title"
-        (change)="displayFormValues()"
         placeholder="title"
       />
       <textarea

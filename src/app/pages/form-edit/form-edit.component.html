@@ -7,14 +7,18 @@
       margin-bottom: 20px;
     "
   >
-    <button (click)="addField()" style="padding: 10px 20px">Save</button>
+    <button (click)="saveSurvey()" style="padding: 10px 20px">Save</button>
   </div>
-  <app-widget-form-title-and-description></app-widget-form-title-and-description>
+  <app-widget-form-title-and-description
+    [formItem]="details()"
+    (onFormUpdated)="updateDetails($event)"
+  ></app-widget-form-title-and-description>
   @for ( field of fields(); track $index) {
 
   <app-widget-create-field
     [fieldData]="field"
     (onDelete)="removeField($index)"
+    (onFormChange)="updateField($index, $event)"
   ></app-widget-create-field>
   }
   <div
