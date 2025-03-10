@@ -8,18 +8,13 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { FieldTypeArray, FieldType } from '../../enums/field-type.enum';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  FormArray,
-  FormBuilder,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormArray, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '../ui/button/button.component';
 
 @Component({
   selector: 'app-widget-create-field',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ButtonComponent],
   templateUrl: './widget-create-field.component.html',
   styleUrl: './widget-create-field.component.css',
 })
@@ -52,7 +47,12 @@ export class WidgetCreateFieldComponent {
       title: this.fieldData.title,
       description: this.fieldData.description,
       type: this.fieldData.type,
+      options: this.fieldData.options,
     });
+    this.fieldData.options.forEach((element: any): any => {
+      this.options.push(this.formBuilder.control(element));
+    });
+    console.log('options', this.fieldData.options);
   }
 
   onAddOption() {

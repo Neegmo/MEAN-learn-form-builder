@@ -1,5 +1,5 @@
 <div class="card">
-  <div style="flex: 1">
+  <div>
     <form action="" [formGroup]="formGroup" (change)="onFormChangeLocal()">
       <input
         type="text"
@@ -17,37 +17,41 @@
       ></textarea>
       <select name="type" id="type" name="type" formControlName="type">
         @for(type of fieldTypesArray; track $index) {
-        <option>{{ type }}</option>
+        <option [selected]="type === formGroup.value.type">{{ type }}</option>
         }
       </select>
       @if(formGroup.value.type === fieldTypes.DROPDOWN) {
       <div formArrayName="options">
         @for(option of options.controls; track option) {
-        <div
-          style="display: flex; margin-top: 10px; margin-bottom: 10px; gap: 5px"
-        >
-          <input type="text" [formControlName]="$index" />
-          <button (click)="onRemoveOption($index)">Delete</button>
+        <div class="option-container">
+          <input
+            class="option-input"
+            type="text"
+            [formControlName]="$index"
+            placeholder="Add Option"
+          />
+          <app-button
+            type="primary"
+            icon="ionRemoveCircle"
+            (handelClick)="onRemoveOption($index)"
+          />
         </div>
         }
-        <button (click)="onAddOption()">Add option</button>
+        <app-button
+          type="primary"
+          icon="ionAddCircle"
+          (handelClick)="onAddOption()"
+        />
       </div>
       }
     </form>
   </div>
-  <div style="flex: 1; display: flex; justify-content: end">
-    <button
-      style="
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
-        background-color: var(--color-background);
-        border: none;
-      "
-      (click)="onDeleteClicked()"
-    >
-      X
-    </button>
+  <div class="delete-container">
+    <app-button
+      type="primary"
+      (handelClick)="onDeleteClicked()"
+      icon="ionTrash"
+      title="delete"
+    />
   </div>
 </div>
-<pre>{{ formGroup.getRawValue() | json }}</pre>

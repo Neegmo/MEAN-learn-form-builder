@@ -32,7 +32,7 @@ export class LoginComponent {
     ],
     button: {
       title: 'login',
-      onClick: () => console.log('Test'),
+      icon: 'ionLogIn',
     },
   };
 

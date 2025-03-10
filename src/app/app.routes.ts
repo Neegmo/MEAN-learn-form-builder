@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { FormEditComponent } from './pages/form-edit/form-edit.component';
+import { SurveyEditComponent } from './pages/survey-edit/survey-edit.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { SurveyPreviewComponent } from './pages/survey-preview/survey-preview.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -18,8 +21,13 @@ export const routes: Routes = [
         title: 'home',
       },
       {
-        path: 'edit-form',
-        component: FormEditComponent,
+        path: 'profile',
+        component: ProfileComponent,
+        title: 'profile',
+      },
+      {
+        path: 'edit-survey/:id',
+        component: SurveyEditComponent,
         title: 'Edit Form',
       },
     ],
@@ -39,6 +47,12 @@ export const routes: Routes = [
         component: RegisterComponent,
         title: 'home',
       },
+      {
+        path: 'preview-survey/:id',
+        component: SurveyPreviewComponent,
+        title: 'Survey',
+      },
     ],
   },
+  { path: '**', component: NotFoundComponent },
 ];

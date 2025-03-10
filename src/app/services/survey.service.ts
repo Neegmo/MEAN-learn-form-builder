@@ -1,26 +1,34 @@
-import { Injectable, signal } from '@angular/core';
-import { FormDetails } from '../interfaces/form-details';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { FieldType } from '../enums/field-type.enum';
+import { SurveyField } from '../interfaces/survey-field';
+import { SurveyData } from '../interfaces/survey-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SurveyService {
-  surveys = new BehaviorSubject<any>([
+  surveys = new BehaviorSubject<SurveyData[]>([
     {
-      title: 'test',
-      description: 'test',
+      info: {
+        title: 'test title',
+        description:
+          'test description that should representa a shord description of a form',
+      },
+      fields: [
+        {
+          title: 'first input',
+          details: 'first input description',
+          type: FieldType.TEXT,
+          options: [],
+        },
+        {
+          title: 'second input',
+          details: 'second input description',
+          type: FieldType.DROPDOWN,
+          options: ['1', '2', '3'],
+        },
+      ],
     },
   ]);
-
-  updateSurveys(survey: any) {
-    // this.surveys.update((value: any[]) => {
-    //   return [...value, survey];
-    // });
-    console.log('SURVEYS UPDATED');
-  }
-
-  getSurveys() {
-    // return this.surveys();
-  }
 }

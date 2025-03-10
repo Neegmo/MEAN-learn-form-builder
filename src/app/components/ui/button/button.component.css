@@ -1,0 +1,61 @@
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 10px 10px;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 2px solid white;
+  /* gap: 20px; */
+}
+p {
+  padding: 0px;
+  padding-right: 30px;
+  margin: 0px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button > ng-icon {
+  color: white;
+}
+
+button.primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+button.primary:hover {
+  background-color: white;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+button.primary:focus {
+  background-color: var(--color-background);
+}
+
+button.primary:hover > ng-icon {
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+button.secondary {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+button.secondary:hover {
+  background-color: white;
+  color: var(--color-secondary);
+  transition: all 0.3s ease;
+}
+
+button.secondary:hover > ng-icon {
+  color: var(--color-secondary);
+  transition: all 0.3s ease;
+}

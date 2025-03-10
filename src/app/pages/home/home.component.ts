@@ -1,54 +1,28 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormListItemComponent } from '../../components/form-list-item/form-list-item.component';
-import { FormListItem } from '../../interfaces/form-list-item';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { SurveyListItemComponent } from '../../components/survey-list-item/survey-list-item.component';
 import { SurveyService } from '../../services/survey.service';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { FieldType } from '../../enums/field-type.enum';
+import { SurveyData } from '../../interfaces/survey-data';
+import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-home',
-  imports: [FormListItemComponent],
+  imports: [SurveyListItemComponent, CommonModule, NgIcon],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  formList: FormListItem[] = [
-    {
-      title: 'Title 1',
-      description: `
-Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-
-Where can I get some?
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-
-5
-	paragraphs
-	words
-	bytes
-	lists
-	Start with 'Lorem
-ipsum dolor sit amet...'
-`,
-    },
-    {
-      title: 'Title 2',
-      description: 'The short description for the second form',
-    },
-    {
-      title: 'Title 3',
-      description: 'The short description for the third form',
-    },
-  ];
+  surveyList: any = signal([]);
   surveysService = inject(SurveyService);
-
+  router = inject(Router);
   subscription: Subscription[] = [];
 
   ngOnInit() {
     // console.log('SURVEYS: ', this.surveysService.getSurveys());
     this.getSurveys();
-    console.log('Service', this.surveysService.surveys.value);
   }
 
   ngOnDestroy() {
@@ -58,8 +32,39 @@ ipsum dolor sit amet...'
   getSurveys() {
     this.subscription.push(
       this.surveysService.surveys.subscribe((value) => {
-        console.log('value: ', value);
+        this.surveyList.set(value);
       })
     );
+    console.log('FORM: ', this.surveyList());
+    console.log('TITLE: ', this.surveyList()[0].info);
+  }
+
+  addNewSurvey() {
+    const newEmptySurvey: SurveyData = {
+      info: {
+        title: '',
+        description: '',
+      },
+      fields: [],
+    };
+    this.surveysService.surveys.next([...this.surveyList(), newEmptySurvey]);
+    this.router.navigate(['/edit-survey', this.surveyList().length - 1]);
+  }
+
+  editSurvey(index: number) {
+    this.router.navigate(['/edit-survey', index]);
+  }
+
+  removeSurvey(index: number) {
+    this.surveyList.update((value: any[]): any => {
+      const tempArray = [...value];
+      tempArray.splice(index, 1);
+      return tempArray;
+    });
+    this.surveysService.surveys.next(this.surveyList());
+  }
+
+  previewSurvey(index: number) {
+    this.router.navigate(['/public/preview-survey', index]);
   }
 }

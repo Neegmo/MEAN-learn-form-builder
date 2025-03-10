@@ -1,5 +1,13 @@
 <div class="container">
-  @for (item of formList; track $index) {
-  <app-form-list-item [formItem]="item"></app-form-list-item>
+  <div class="card" (click)="addNewSurvey()">
+    <ng-icon name="ionAddCircle" size="100" />
+  </div>
+  @for (item of surveyList(); track item) {
+  <app-survey-list-item
+    [formItem]="item.info"
+    (onDelete)="removeSurvey($index)"
+    (onEdit)="editSurvey($index)"
+    (onView)="previewSurvey($index)"
+  ></app-survey-list-item>
   }
 </div>

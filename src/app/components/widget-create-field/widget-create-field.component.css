@@ -11,8 +11,11 @@
 
 select {
   margin-top: 20px;
+  margin-bottom: 20px;
   padding: 5px 10px;
   border-radius: 5px;
+  min-height: 2.5rem;
+  padding: 5px 10px;
 }
 .title {
   border: none;
@@ -35,4 +38,24 @@ select {
 .description:focus {
   outline: none;
   border-bottom: 4px solid var(--color-primary);
+}
+
+.option-input {
+  min-height: 2.5rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+.option-container {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.delete-container {
+  flex: 1;
+  display: flex;
+  justify-content: end;
 }

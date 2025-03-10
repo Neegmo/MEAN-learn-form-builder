@@ -10,10 +10,12 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormService } from '../../services/form.service';
 import { FormDetails } from '../../interfaces/form-details';
+import { NgIcon } from '@ng-icons/core';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-factory',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIcon, TitleCasePipe],
   templateUrl: './form-factory.component.html',
   styleUrl: './form-factory.component.css',
 })

@@ -1,4 +1,7 @@
+import { IconType } from '@ng-icons/core';
+
 export interface FormButton {
   title: string;
-  onClick: any;
+  type?: string;
+  icon?: IconType;
 }

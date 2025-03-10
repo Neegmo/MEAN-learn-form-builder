@@ -1,13 +1,11 @@
 <div class="container">
-  <div
-    style="
-      display: flex;
-      width: 100%;
-      justify-content: end;
-      margin-bottom: 20px;
-    "
-  >
-    <button (click)="saveSurvey()" style="padding: 10px 20px">Save</button>
+  <div class="header-container">
+    <app-button
+      type="primary"
+      title="Save Survey"
+      icon="ionSave"
+      (handelClick)="saveSurvey()"
+    />
   </div>
   <app-widget-form-title-and-description
     [formItem]="details()"
@@ -21,14 +19,12 @@
     (onFormChange)="updateField($index, $event)"
   ></app-widget-create-field>
   }
-  <div
-    style="
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      margin-top: 20px;
-    "
-  >
-    <button (click)="addField()" style="padding: 10px 20px">Add field</button>
+  <div class="add-field-container">
+    <app-button
+      type="primary"
+      title="Add Field"
+      icon="ionAddCircle"
+      (handelClick)="addField()"
+    />
   </div>
 </div>
