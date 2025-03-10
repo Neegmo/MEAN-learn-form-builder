@@ -59,3 +59,9 @@ select {
   display: flex;
   justify-content: end;
 }
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+  }
+}

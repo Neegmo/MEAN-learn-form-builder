@@ -4,9 +4,25 @@
   width: 250px;
   height: 100vh;
   background-color: var(--color-primary);
-  /* align-items: center; */
   padding: 30px;
   gap: 20px;
+}
+
+.open-menu {
+  display: none;
+}
+
+.close-container {
+  display: none;
+}
+
+.close-button {
+  background-color: var(--color-primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: large;
 }
 
 .logo-container {
@@ -46,4 +62,39 @@ li a {
 li:hover a {
   color: white;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .open-menu {
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 70px;
+    background-color: var(--color-secondary);
+    color: white;
+  }
+  .navbar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-primary);
+    padding: 30px;
+    gap: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .close-container {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+  .closed {
+    transform: translate(-100vw);
+  }
 }

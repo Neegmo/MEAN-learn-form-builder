@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
@@ -7,4 +7,10 @@ import { NgIcon } from '@ng-icons/core';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  closed: WritableSignal<boolean> = signal(true);
+
+  toggleMenu() {
+    this.closed.update((value) => !value);
+  }
+}

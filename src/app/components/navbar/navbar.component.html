@@ -1,4 +1,7 @@
-<div class="navbar">
+<div class="open-menu" (click)="toggleMenu()">
+  <ng-icon name="ionMenu" size="30" />
+</div>
+<div class="navbar" [class.closed]="closed()">
   <div class="logo-container">
     <img src="itc-query-logo.png" class="logo" alt="ITCquery logo" />
     <p class="logo-text">ITCquery</p>
@@ -12,4 +15,9 @@
       <a href="/profile"><ng-icon name="ionPerson" /> Profile</a>
     </li>
   </ul>
+  <div class="close-container">
+    <button class="close-button" (click)="toggleMenu()">
+      Close <ng-icon name="ionClose" size="30" />
+    </button>
+  </div>
 </div>
