@@ -1,0 +1,15 @@
+<div class="card">
+  <div>
+    <h2>{{ formItem().title | titlecase }}</h2>
+    <p class="description">{{ formItem().description }}</p>
+  </div>
+  <div style="flex: 1" class="row">
+    <app-button type="primary" icon="ionPencil" (handelClick)="onEditLocal()" />
+    <app-button
+      type="primary"
+      icon="ionTrash"
+      (handelClick)="onDeleteLocal()"
+    />
+    <app-button type="secondary" icon="ionEye" (handelClick)="onViewLocal()" />
+  </div>
+</div>

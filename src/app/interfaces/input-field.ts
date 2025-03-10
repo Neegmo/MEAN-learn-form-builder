@@ -2,7 +2,7 @@ export interface InputField {
   type: 'text' | 'textArea' | 'dropdown';
   label: string;
   placeholder: string;
-  formControlName: any;
+  formControlName: string;
   value: string;
   options?: string[];
 }

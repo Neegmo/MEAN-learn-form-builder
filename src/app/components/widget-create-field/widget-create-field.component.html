@@ -1,0 +1,57 @@
+<div class="card">
+  <div>
+    <form action="" [formGroup]="formGroup" (change)="onFormChangeLocal()">
+      <input
+        type="text"
+        name="title"
+        class="title"
+        formControlName="title"
+        placeholder="title"
+      />
+      <textarea
+        name="description"
+        class="description"
+        rows="1"
+        formControlName="description"
+        placeholder="description"
+      ></textarea>
+      <select name="type" id="type" name="type" formControlName="type">
+        @for(type of fieldTypesArray; track $index) {
+        <option [selected]="type === formGroup.value.type">{{ type }}</option>
+        }
+      </select>
+      @if(formGroup.value.type === fieldTypes.DROPDOWN) {
+      <div formArrayName="options">
+        @for(option of options.controls; track option) {
+        <div class="option-container">
+          <input
+            class="option-input"
+            type="text"
+            [formControlName]="$index"
+            placeholder="Add Option"
+          />
+          <app-button
+            type="primary"
+            icon="ionRemoveCircle"
+            (handelClick)="onRemoveOption($index)"
+          />
+        </div>
+        }
+        <app-button
+          type="primary"
+          icon="ionAddCircle"
+          (handelClick)="onAddOption()"
+        />
+      </div>
+      }
+    </form>
+  </div>
+  <div class="delete-container">
+    <app-button
+      type="primary"
+      (handelClick)="onDeleteClicked()"
+      icon="ionTrash"
+      title="delete"
+    />
+  </div>
+</div>

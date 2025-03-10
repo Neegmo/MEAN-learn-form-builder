@@ -1,0 +1,7 @@
+<button [class]="type()" (click)="onClickLocal()">
+  @if(title() !== "") {
+
+  <p>{{ title() | titlecase }}</p>
+  }
+  <ng-icon [name]="icon()" [size]="iconSize()" />
+</button>

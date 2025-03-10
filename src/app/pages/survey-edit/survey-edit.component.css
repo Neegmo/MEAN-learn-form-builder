@@ -1,0 +1,18 @@
+.container {
+  /* display: flex; */
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+.add-field-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}
+.header-container {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  margin-bottom: 20px;
+}

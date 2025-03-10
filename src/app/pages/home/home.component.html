@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card" (click)="addNewSurvey()">
+    <ng-icon name="ionAddCircle" size="100" />
+  </div>
+  @for (item of surveyList(); track item) {
+  <app-survey-list-item
+    [formItem]="item.info"
+    (onDelete)="removeSurvey($index)"
+    (onEdit)="editSurvey($index)"
+    (onView)="previewSurvey($index)"
+  ></app-survey-list-item>
+  }
+</div>

@@ -1,0 +1,17 @@
+<div class="card">
+  <form [formGroup]="surveyInfo" (change)="onFormUpdatedLocal()">
+    <input
+      type="text"
+      class="title"
+      formControlName="title"
+      placeholder="title"
+    />
+    <textarea
+      name="Description"
+      class="description"
+      rows="1"
+      formControlName="description"
+      placeholder="Description"
+    ></textarea>
+  </form>
+</div>

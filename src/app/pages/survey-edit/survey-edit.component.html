@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="header-container">
+    <app-button
+      type="primary"
+      title="Save Survey"
+      icon="ionSave"
+      (handelClick)="saveSurvey()"
+    />
+  </div>
+  <app-widget-form-title-and-description
+    [formItem]="details()"
+    (onFormUpdated)="updateDetails($event)"
+  ></app-widget-form-title-and-description>
+  @for ( field of fields(); track $index) {
+
+  <app-widget-create-field
+    [fieldData]="field"
+    (onDelete)="removeField($index)"
+    (onFormChange)="updateField($index, $event)"
+  ></app-widget-create-field>
+  }
+  <div class="add-field-container">
+    <app-button
+      type="primary"
+      title="Add Field"
+      icon="ionAddCircle"
+      (handelClick)="addField()"
+    />
+  </div>
+</div>
